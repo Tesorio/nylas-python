@@ -75,10 +75,10 @@ class RestfulModelCollection(object):
     def delete(self, id, data=None, **kwargs):
         return self.api._delete_resource(self.model_class, id, data=data, **kwargs)
 
-    def search(self, q):  # pylint: disable=invalid-name
+    def search(self, q, **kwargs):  # pylint: disable=invalid-name
         from nylas.client.restful_models import Message, Thread  # pylint: disable=cyclic-import
         if self.model_class is Thread or self.model_class is Message:
-            kwargs = {'q': q}
+            kwargs['q'] = q
             return self.api._get_resources(self.model_class, extra="search", **kwargs)
         else:
             raise Exception("Searching is only allowed on Thread and Message models")
