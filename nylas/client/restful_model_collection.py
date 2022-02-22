@@ -12,6 +12,7 @@ class RestfulModelCollection(object):
             raise Exception("Provided api was not an APIClient.")
 
         filters.setdefault('offset', offset)
+        filters.setdefault('limit', CHUNK_SIZE)
 
         self.model_class = cls
         self.filters = filters
@@ -22,15 +23,16 @@ class RestfulModelCollection(object):
 
     def values(self):
         offset = self.filters['offset']
+        limit = self.filters['limit']
         while True:
-            models = self._get_model_collection(offset, CHUNK_SIZE)
+            models = self._get_model_collection(offset, limit)
             if not models:
                 break
 
             for model in models:
                 yield model
 
-            if len(models) < CHUNK_SIZE:
+            if len(models) < limit:
                 break
 
             offset += len(models)
@@ -59,6 +61,7 @@ class RestfulModelCollection(object):
         if filter:
             filters.update(filter)
         filters.setdefault('offset', 0)
+        filters.setdefault('limit', CHUNK_SIZE)
         collection = copy(self)
         collection.filters = filters
         return collection
@@ -72,10 +75,10 @@ class RestfulModelCollection(object):
     def delete(self, id, data=None, **kwargs):
         return self.api._delete_resource(self.model_class, id, data=data, **kwargs)
 
-    def search(self, q):  # pylint: disable=invalid-name
+    def search(self, q, **kwargs):  # pylint: disable=invalid-name
         from nylas.client.restful_models import Message, Thread  # pylint: disable=cyclic-import
         if self.model_class is Thread or self.model_class is Message:
-            kwargs = {'q': q}
+            kwargs['q'] = q
             return self.api._get_resources(self.model_class, extra="search", **kwargs)
         else:
             raise Exception("Searching is only allowed on Thread and Message models")

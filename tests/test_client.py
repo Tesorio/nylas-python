@@ -61,7 +61,7 @@ def test_client_authentication_url(api_client, api_url):
             ('redirect_uri', '/redirect'),
             ('response_type', 'code'),
             ('client_id', 'None'),
-            ('scope', 'email'),
+            ('scopes', 'email,calendar,contacts'),
         ])
     )
     actual = URLObject(api_client.authentication_url("/redirect"))
