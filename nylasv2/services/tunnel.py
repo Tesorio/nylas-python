@@ -4,9 +4,9 @@ import websocket
 import json
 from threading import Thread
 
-from nylas.client import APIClient
-from nylas.client.restful_models import Webhook
-from nylas.config import DEFAULT_REGION
+from nylasv2.client import APIClient
+from nylasv2.client.restful_models import Webhook
+from nylasv2.config import DEFAULT_REGION
 
 
 def open_webhook_tunnel(api, config):

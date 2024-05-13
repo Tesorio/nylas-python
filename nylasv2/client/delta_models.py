@@ -1,4 +1,4 @@
-from nylas.client.restful_models import (
+from nylasv2.client.restful_models import (
     RestfulModel,
     NylasAPIObject,
     Contact,

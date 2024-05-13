@@ -5,9 +5,9 @@ from collections import defaultdict
 from enum import Enum
 
 from six import StringIO
-from nylas.client.restful_model_collection import RestfulModelCollection
-from nylas.client.errors import FileUploadError, UnSyncedError, NylasApiError
-from nylas.utils import timestamp_from_dt, AuthMethod
+from nylasv2.client.restful_model_collection import RestfulModelCollection
+from nylasv2.client.errors import FileUploadError, UnSyncedError, NylasApiError
+from nylasv2.utils import timestamp_from_dt, AuthMethod
 
 # pylint: disable=attribute-defined-outside-init
 
@@ -989,7 +989,7 @@ class Webhook(NylasAPIObject):
     @staticmethod
     def verify_webhook_signature(nylas_signature, raw_body, client_secret):
         """
-        Verify incoming webhook signature came from Nylas
+        Verify incoming webhook signature came from nylasv2
 
         Args:
             nylas_signature (str): The signature to verify
@@ -997,7 +997,7 @@ class Webhook(NylasAPIObject):
             client_secret (str): Client secret of the app receiving the webhook
 
         Returns:
-            bool: True if the webhook signature was verified from Nylas
+            bool: True if the webhook signature was verified from nylasv2
         """
         digest = hmac.new(
             str.encode(client_secret), msg=raw_body, digestmod=hashlib.sha256

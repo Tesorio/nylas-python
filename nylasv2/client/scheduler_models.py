@@ -1,4 +1,4 @@
-from nylas.client.restful_models import RestfulModel
+from nylasv2.client.restful_models import RestfulModel
 
 
 class SchedulerTimeSlot(RestfulModel):

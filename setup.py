@@ -1,12 +1,12 @@
-import sys
 import re
 import subprocess
-from setuptools import setup, find_packages
+import sys
+
+from setuptools import find_packages, setup
 from setuptools.command.test import test as TestCommand
 
-
 VERSION = ""
-with open("nylas/_client_sdk_version.py", "r") as fd:
+with open("nylasv2/_client_sdk_version.py", "r") as fd:
     VERSION = re.search(
         r'^__VERSION__\s*=\s*[\'"]([^\'"]*)[\'"]', fd.read(), re.MULTILINE
     ).group(1)
@@ -93,7 +93,7 @@ def main():
             sys.exit()
 
     setup(
-        name="nylas",
+        name="nylasv2",
         version=VERSION,
         packages=find_packages(),
         install_requires=RUN_DEPENDENCIES,
