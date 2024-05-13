@@ -11,12 +11,12 @@ import requests
 from urlobject import URLObject
 import six
 from six.moves.urllib.parse import urlencode
-from nylas._client_sdk_version import __VERSION__
-from nylas.client.delta_collection import DeltaCollection
-from nylas.client.errors import MessageRejectedError, NylasApiError, RateLimitError
-from nylas.client.outbox_models import Outbox
-from nylas.client.restful_model_collection import RestfulModelCollection
-from nylas.client.restful_models import (
+from nylasv2._client_sdk_version import __VERSION__
+from nylasv2.client.delta_collection import DeltaCollection
+from nylasv2.client.errors import MessageRejectedError, NylasApiError, RateLimitError
+from nylasv2.client.outbox_models import Outbox
+from nylasv2.client.restful_model_collection import RestfulModelCollection
+from nylasv2.client.restful_models import (
     Calendar,
     Contact,
     Event,
@@ -35,12 +35,12 @@ from nylas.client.restful_models import (
     Webhook,
     Send,
 )
-from nylas.client.neural_api_models import Neural
-from nylas.client.scheduler_restful_model_collection import (
+from nylasv2.client.neural_api_models import Neural
+from nylasv2.client.scheduler_restful_model_collection import (
     SchedulerRestfulModelCollection,
 )
-from nylas.client.authentication_models import Authentication
-from nylas.utils import timestamp_from_dt, create_request_body, AuthMethod, HttpMethod
+from nylasv2.client.authentication_models import Authentication
+from nylasv2.utils import timestamp_from_dt, create_request_body, AuthMethod, HttpMethod
 
 DEBUG = environ.get("NYLAS_CLIENT_DEBUG")
 API_SERVER = "https://api.nylas.com"
@@ -222,7 +222,7 @@ class APIClient(json.JSONEncoder):
         Exchange an authorization code for an access token
 
         Args:
-            code (str): One-time authorization code from Nylas
+            code (str): One-time authorization code from nylasv2
 
         Returns:
             str: The access token

@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from nylas.client.restful_models import RestfulModel, Draft
-from nylas.utils import timestamp_from_dt
+from nylasv2.client.restful_models import RestfulModel, Draft
+from nylasv2.utils import timestamp_from_dt
 
 
 class OutboxMessage(RestfulModel):
